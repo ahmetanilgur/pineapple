@@ -96,8 +96,8 @@ class Setup extends APIModule
         /* Disabled for PI_napple
         if (!$this->checkButtonStatus()) {
             return false;
-        */
         }
+        */
         if ($this->request->eula !== true || $this->request->license !== true) {
             $this->error = "Please accept the EULA and Software License.";
             return false;
