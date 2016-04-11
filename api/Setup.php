@@ -21,9 +21,13 @@ class Setup extends APIModule
         file_put_contents("/etc/shadow", $shadow_file);
         return true;
     }
-/* Disabled for PI_napple
+
     private function checkButtonStatus()
     {
+        /* Disabled for PI_napple added 2 lines */
+        $buttonPressed = true;
+        $bootStatus = true;
+        /* Disabled for PI_napple
         $buttonPressed = false;
         $bootStatus = false;
         if (file_exists('/tmp/button_setup')) {
