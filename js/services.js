@@ -5,7 +5,7 @@
 
         this.request = (function(data, callback, scope) {
             
-            return $http.post('/api/', data).
+            return $http.post('./api/', data).
             then(function(response){
                 if (response.data.error === "Not Authenticated") {
                     if (response.data.setupRequired === true) {
