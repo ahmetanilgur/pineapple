@@ -6,7 +6,7 @@ class Authentication extends APIModule
 {
     private $dbConnection;
 
-    const DATABASE = "/etc/PI_napple/pineapple.db";
+    const DATABASE = "/etc/PI_napple/PI_napple.db";
 
     public function __construct($request)
     {
