@@ -1,0 +1,163 @@
+<div ng-controller="ReconController">
+	<div class="row">
+		<div class="col-md-5">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Scan Settings</h3>
+				</div>
+				<div class="panel-body">
+					<form class="form-inline" ng-submit="startScan()">
+						<div class="form-group">
+							<label class="radio-inline"><input type="radio" ng-model="scanType" value="apOnly" ng-disabled="running">AP Only</label>
+							<label class="radio-inline"><input type="radio" ng-model="scanType" value="clientAP" ng-disabled="running">AP & Client</label>
+
+							<select class="form-control padding-left" ng-model="scanDuration" ng-hide="(scanType == 'apOnly')" ng-disabled="running">
+								<option value="15">15 Seconds</option>
+								<option value="30">30 Seconds</option>
+								<option value="60">1 Minute</option>
+								<option value="120">2 Minute</option>
+								<option value="300">5 Minutes</option>
+								<option value="600">10 Minutes</option>
+							</select>
+
+							<button type="submit" class="btn" ng-hide="running" ng-disabled="loading">
+								Scan
+							</button>
+							<button type="button" class="btn" ng-click="stopScan()" ng-show="running">
+								Stop
+							</button>
+							<img src="img/throbber.gif" ng-show="loading">
+
+							<br />
+							<label class="checkbox-inline">
+								<input type="checkbox" ng-model="continuous" ng-disabled="running">
+								Continuous
+							</label>
+
+							<br/>
+							<br/>
+
+							<div class="progress" ng-show="running">
+								<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">{{ percent }}%</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Scan Results</h3>
+				</div>
+				<div class="table-responsive">
+					<table class="table" ng-hide="(accessPoints.length == 0)">
+						<thead>
+							<tr>
+								<th class="autoselect">SSID</th>
+								<th class="autoselect">MAC</th>
+								<th>Security</th>
+								<th>Channel</th>
+								<th>Signal</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat-start="accessPoint in accessPoints">
+								<td class="autoselect">
+									<span class="text-info" ng-hide="accessPoint.ssid"><i>Hidden</i></span>
+									{{ accessPoint.ssid }}
+									<hook-button hook="ssid" content="accessPoint.ssid" deauth="{bssid: accessPoint.mac, clients: accessPoint.clients, channel: accessPoint.channel}"></hook-button>
+								</td>
+								<td class="autoselect">
+									{{ accessPoint.mac }}
+									<hook-button hook="mac" content="accessPoint.mac"></hook-button>
+								</td>
+								<td class="text-capitalize">{{ accessPoint.security }}</td>
+								<td>{{ accessPoint.channel }}</td>
+								<td>{{ accessPoint.signal }}</td>
+							</tr>
+							<tr ng-repeat="mac in accessPoint.clients" ng-repeat-end class="active">
+								<td></td>
+								<td class="autoselect">
+									{{ mac }}
+									<hook-button hook="mac" content="mac" deauth="{bssid: accessPoint.mac, channel: accessPoint.channel}"></hook-button>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-body" ng-show="(accessPoints.length === 0)">
+					No scan results.
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" ng-hide="(outOfRangeClients.length == 0)">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Out Of Range Clients</h3>
+				</div>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Access Point MAC</th>
+								<th>Client</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat-start="accessPoint in outOfRangeClients">
+								<td class="autoselect">
+									{{ accessPoint.mac }}
+									<hook-button hook="mac" content="accessPoint.mac"></hook-button>
+								</td>
+								<td></td>
+							</tr>
+							<tr ng-repeat="mac in accessPoint.clients" ng-repeat-end class="active">
+								<td></td>
+								<td class="autoselect">
+									{{ mac }}
+									<hook-button hook="mac" content="mac"></hook-button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" ng-hide="(unassociatedClients.length == 0)">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Unassociated Clients</h3>
+				</div>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>MAC</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="client in unassociatedClients">
+								<td class="autoselect">
+									{{ client }}
+									<hook-button hook="mac" content="client"></hook-button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
