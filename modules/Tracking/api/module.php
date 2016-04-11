@@ -33,21 +33,21 @@ class Tracking extends SystemModule
 
     private function getScript()
     {
-        $trackingScript = file_get_contents("/etc/pineapple/tracking_script_user");
+        $trackingScript = file_get_contents("/etc/PI_napple/tracking_script_user");
         $this->response = array("trackingScript" => $trackingScript);
     }
 
     private function saveScript()
     {
         if (isset($this->request->trackingScript)) {
-            file_put_contents("/etc/pineapple/tracking_script_user", $this->request->trackingScript);
+            file_put_contents("/etc/PI_napple/tracking_script_user", $this->request->trackingScript);
         }
         $this->response = array("success" => true);
     }
 
     private function getTrackingList()
     {
-        $trackingList = file_get_contents("/etc/pineapple/tracking_list");
+        $trackingList = file_get_contents("/etc/PI_napple/tracking_list");
         $this->response =  array("trackingList" => $trackingList);
     }
 
@@ -55,7 +55,7 @@ class Tracking extends SystemModule
     {
         if (isset($this->request->mac) && !empty($this->request->mac)) {
             $mac = $this->request->mac;
-            file_put_contents("/etc/pineapple/tracking_list", "{$mac}\n", FILE_APPEND);
+            file_put_contents("/etc/PI_napple/tracking_list", "{$mac}\n", FILE_APPEND);
             $this->execBackground("/usr/bin/pineapple/uds_send /var/run/log_daemon.sock 'track:$mac'");
             $this->getTrackingList();
         }
@@ -65,7 +65,7 @@ class Tracking extends SystemModule
     {
         if (isset($this->request->mac) && !empty($this->request->mac)) {
             $mac = $this->request->mac;
-            exec("sed -r '/^({$mac})$/d' -i /etc/pineapple/tracking_list");
+            exec("sed -r '/^({$mac})$/d' -i /etc/PI_napple/tracking_list");
             $this->execBackground("/usr/bin/pineapple/uds_send /var/run/log_daemon.sock 'untrack:$mac'");
             $this->getTrackingList();
         }
@@ -73,7 +73,7 @@ class Tracking extends SystemModule
 
     private function clearMacs()
     {
-        file_put_contents("/etc/pineapple/tracking_list", "");
+        file_put_contents("/etc/PI_napple/tracking_list", "");
         $this->execBackground("killall log_daemon; log_daemon /tmp/pineap.log 30");
         $this->getTrackingList();
     }

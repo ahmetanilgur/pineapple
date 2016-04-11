@@ -61,7 +61,7 @@ class PineAP extends SystemModule
 
     private function downloadPineAPPool()
     {
-        $this->response = array("download" => $this->downloadFile('/etc/pineapple/ssid_file'));
+        $this->response = array("download" => $this->downloadFile('/etc/PI_napple/ssid_file'));
     }
 
     private function enable()
@@ -105,7 +105,7 @@ class PineAP extends SystemModule
     private function getPool()
     {
         $this->checkPineAP();
-        $this->response = array('ssidPool' => file_get_contents('/etc/pineapple/ssid_file'), 'success' => true);
+        $this->response = array('ssidPool' => file_get_contents('/etc/PI_napple/ssid_file'), 'success' => true);
     }
 
     private function clearPool()

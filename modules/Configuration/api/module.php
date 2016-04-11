@@ -85,7 +85,7 @@ class Configuration extends SystemModule
 
     private function getLandingPageData()
     {
-        $landingPage = file_get_contents('/etc/pineapple/landingpage.php');
+        $landingPage = file_get_contents('/etc/PI_napple/landingpage.php');
         $this->response = array("landingPage" => $landingPage);
     }
 
@@ -115,7 +115,7 @@ class Configuration extends SystemModule
 
     private function saveLandingPageData()
     {
-        if (file_put_contents('/etc/pineapple/landingpage.php', $this->request->landingPageData) !== false) {
+        if (file_put_contents('/etc/PI_napple/landingpage.php', $this->request->landingPageData) !== false) {
             $this->response = array("success" => true);
         } else {
             $this->error = "Error saving Landing Page.";

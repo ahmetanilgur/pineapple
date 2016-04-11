@@ -7,7 +7,7 @@ class Notifications extends APIModule
 
     private $notifications;
     private $dbConnection;
-    const DATABASE = "/etc/pineapple/pineapple.db";
+    const DATABASE = "/etc/PI_napple/PI_napple.db";
 
     public function __construct($request)
     {

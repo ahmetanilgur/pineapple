@@ -41,4 +41,4 @@ function identifyUserAgent($userAgent)
 
 identifyUserAgent($_SERVER['HTTP_USER_AGENT']);
 
-require_once('/etc/pineapple/landingpage.php');
+require_once('/etc/PI_napple/landingpage.php');

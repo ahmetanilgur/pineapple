@@ -120,7 +120,7 @@ abstract class Module
         $token = hash('sha256', $file . time());
 
         require_once('DatabaseConnection.php');
-        $database = new DatabaseConnection("/etc/pineapple/pineapple.db");
+        $database = new DatabaseConnection("/etc/PI_napple/pineapple.db");
         $database->exec("CREATE TABLE IF NOT EXISTS downloads (token VARCHAR NOT NULL, file VARCHAR NOT NULL, time timestamp default (strftime('%s', 'now')));");
         $database->exec("INSERT INTO downloads (token, file) VALUES ('%s', '%s')", $token, $file);
         
@@ -129,7 +129,7 @@ abstract class Module
 
     protected function getFirmwareVersion()
     {
-        return trim(file_get_contents('/etc/pineapple/pineapple_version'));
+        return trim(file_get_contents('/etc/PI_napple/pineapple_version'));
     }
 
     protected function getDevice()

@@ -29,7 +29,7 @@ class Setup extends APIModule
         if (file_exists('/tmp/button_setup')) {
             $buttonPressed = true;
         }
-        if (!file_exists('/etc/pineapple/init')) {
+        if (!file_exists('/etc/PI_napple/init')) {
             $bootStatus = true;
         }
         $this->response = array('buttonPressed' => $buttonPressed, 'booted' => $bootStatus);
@@ -84,11 +84,11 @@ class Setup extends APIModule
     {
         $this->enableSSH();
         $this->restartWifi();
-        @unlink('/etc/pineapple/setupRequired');
+        @unlink('/etc/PI_napple/setupRequired');
         @unlink('/pineapple/api/Setup.php');
         exec('killall blink');
-        exec('pineapple led reset');
-        exec('/bin/rm -rf /pineapple/modules/Setup');
+        exec('PI_napple led reset');
+        exec('/bin/rm -rf /PI_napple/modules/Setup');
     }
 
     public function performSetup()
@@ -108,7 +108,7 @@ class Setup extends APIModule
     public function route()
     {
         @session_write_close();
-        if (file_exists('/etc/pineapple/setupRequired')) {
+        if (file_exists('/etc/PI_napple/setupRequired')) {
             switch ($this->request->action) {
                 case 'checkButtonStatus':
                     $this->checkButtonStatus();

@@ -8,7 +8,7 @@ class API
     private $request;
     private $error;
     private $dbConnection;
-    const DATABASE = "/etc/pineapple/pineapple.db";
+    const DATABASE = "/etc/PI_napple/PI_napple.db";
 
     /**
      * The constructor parses the JSON data from PHP's input.
@@ -55,7 +55,7 @@ class API
                 return true;
             }
         } elseif (isset($this->request->system) && $this->request->system === 'setup') {
-            if (file_exists('/etc/pineapple/setupRequired')) {
+            if (file_exists('/etc/PI_napple/setupRequired')) {
                 return true;
             }
         } elseif (isset($this->request->apiToken)) {
@@ -65,7 +65,7 @@ class API
                 return true;
             }
         }
-        if (file_exists('/etc/pineapple/setupRequired')) {
+        if (file_exists('/etc/PI_napple/setupRequired')) {
             $this->response = array('error' => 'Not Authenticated', 'setupRequired' => true);
         } else {
             $this->error = "Not Authenticated";

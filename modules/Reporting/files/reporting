@@ -34,9 +34,9 @@ sendEmail() {
 
 getPineAPReport() {
     [[ "$(uci get reporting.settings.log)" == "1" ]] && {
-        cp $(cat /etc/pineapple/pineap_log_location)pineap.log $tmpdir/report/pineap.log
+        cp $(cat /etc/PI_napple/pineap_log_location)pineap.log $tmpdir/report/pineap.log
         [[ "$(uci get reporting.settings.clear_log)" == "1" ]] && {
-            echo "" > $(cat /etc/pineapple/pineap_log_location)pineap.log
+            echo "" > $(cat /etc/PI_napple/pineap_log_location)pineap.log
         }
     }
 }

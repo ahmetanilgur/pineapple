@@ -6,7 +6,7 @@ class Authentication extends APIModule
 {
     private $dbConnection;
 
-    const DATABASE = "/etc/pineapple/pineapple.db";
+    const DATABASE = "/etc/PI_napple/pineapple.db";
 
     public function __construct($request)
     {
@@ -90,7 +90,7 @@ class Authentication extends APIModule
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             $this->response = array("authenticated" => true);
         } else {
-            if (file_exists("/etc/pineapple/setupRequired")) {
+            if (file_exists("/etc/PI_napple/setupRequired")) {
                 $this->response = array("error" => "Not Authenticated", "setupRequired" => true);
             } else {
                 $this->response = array("error" => "Not Authenticated");

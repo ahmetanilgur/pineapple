@@ -47,7 +47,7 @@ class Clients extends SystemModule
     private function getSSIDData()
     {
         $ssidData = array();
-        $pineAPLogPath = trim(file_get_contents('/etc/pineapple/pineap_log_location'));
+        $pineAPLogPath = trim(file_get_contents('/etc/PI_napple/pineap_log_location'));
         $file = fopen($pineAPLogPath . 'pineap.log', 'r');
         while (($line = fgets($file)) !== false) {
             if (strpos($line, "\tAssociation,\t") !== false) {

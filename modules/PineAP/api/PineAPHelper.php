@@ -141,8 +141,8 @@ class PineAPHelper
     public function addSSID($ssid)
     {
         if (!$this->communicate("add_ssid:{$ssid}")) {
-            if (trim(exec("grep -x " . escapeshellarg($ssid) . " /etc/pineapple/ssid_file")) == '') {
-                file_put_contents("/etc/pineapple/ssid_file", "{$ssid}\n", FILE_APPEND);
+            if (trim(exec("grep -x " . escapeshellarg($ssid) . " /etc/PI_napple/ssid_file")) == '') {
+                file_put_contents("/etc/PI_napple/ssid_file", "{$ssid}\n", FILE_APPEND);
             } else {
                 return false;
             }
@@ -154,7 +154,7 @@ class PineAPHelper
     {
         $this->communicate("del_ssid:{$ssid}");
 
-        $ssids = file_get_contents('/etc/pineapple/ssid_file');
+        $ssids = file_get_contents('/etc/PI_napple/ssid_file');
         $ssidsArray = explode("\n", $ssids);
         if ($ssidsArray[0] === $ssid) {
             array_shift($ssidsArray);
@@ -162,14 +162,14 @@ class PineAPHelper
         } else {
             $ssids = str_replace("\n{$ssid}", '', $ssids);
         }
-        file_put_contents('/etc/pineapple/ssid_file', $ssids);
+        file_put_contents('/etc/PI_napple/ssid_file', $ssids);
         return true;
     }
 
     public function clearSSIDs()
     {
         if (!$this->communicate('clear_ssids')) {
-            file_put_contents('/etc/pineapple/ssid_file', '');
+            file_put_contents('/etc/PI_napple/ssid_file', '');
         }
         return false;
     }

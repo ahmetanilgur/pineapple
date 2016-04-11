@@ -69,7 +69,7 @@ class Dashboard extends SystemModule
 
     private function getSSIDs()
     {
-        $SSIDs = exec("wc -l /etc/pineapple/ssid_file | awk '{print \$1}'");
+        $SSIDs = exec("wc -l /etc/PI_napple/ssid_file | awk '{print \$1}'");
         return $SSIDs;
     }
 
@@ -77,7 +77,7 @@ class Dashboard extends SystemModule
     {
         touch('/tmp/boot_ssid_count');
         $oldCount = intval(file_get_contents('/tmp/boot_ssid_count'));
-        $currentCount = intval(exec('wc -l /etc/pineapple/ssid_file | awk \'{print $1}\''));
+        $currentCount = intval(exec('wc -l /etc/PI_napple/ssid_file | awk \'{print $1}\''));
         return (($currentCount - $oldCount) >= 0) ? ($currentCount - $oldCount) : 0;
     }
 

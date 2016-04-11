@@ -41,7 +41,7 @@ class Logging extends SystemModule
 
     private function downloadPineapLog()
     {
-        $this->response = array("download" => $this->downloadFile(file_get_contents('/etc/pineapple/pineap_log_location') . 'pineap.log'));
+        $this->response = array("download" => $this->downloadFile(file_get_contents('/etc/PI_napple/pineap_log_location') . 'pineap.log'));
     }
 
     private function getSyslog()
@@ -70,9 +70,9 @@ class Logging extends SystemModule
 
     private function getPineapLog()
     {
-        touch(file_get_contents('/etc/pineapple/pineap_log_location') . 'pineap.log');
+        touch(file_get_contents('/etc/PI_napple/pineap_log_location') . 'pineap.log');
         $this->streamFunction = function () {
-            $fp = fopen(file_get_contents('/etc/pineapple/pineap_log_location') . 'pineap.log', 'r');
+            $fp = fopen(file_get_contents('/etc/PI_napple/pineap_log_location') . 'pineap.log', 'r');
             echo '[';
             while (!feof($fp)) {
                 $line = fgets($fp);
@@ -89,18 +89,18 @@ class Logging extends SystemModule
 
     private function clearPineapLog()
     {
-        file_put_contents(file_get_contents('/etc/pineapple/pineap_log_location') . 'pineap.log', '');
+        file_put_contents(file_get_contents('/etc/PI_napple/pineap_log_location') . 'pineap.log', '');
         $this->response = array('Success');
     }
 
     private function getPineapLogLocation()
     {
-        $this->response = array('location' => trim(file_get_contents('/etc/pineapple/pineap_log_location')));
+        $this->response = array('location' => trim(file_get_contents('/etc/PI_napple/pineap_log_location')));
     }
 
     private function setPineapLogLocation()
     {
-        file_put_contents('/etc/pineapple/pineap_log_location', $this->request->location);
+        file_put_contents('/etc/PI_napple/pineap_log_location', $this->request->location);
         $this->response = array('success' => true);
     }
 }

@@ -89,7 +89,7 @@ def interpret_commands(commands):
         communicate("add_ssid:" + commands[2])
     elif commands[1] == "delssid":
         communicate("del_ssid:" + commands[2])
-        os.system("sed -r '/^(" + commands[2] + ")$/d' -i /etc/pineapple/ssid_file")
+        os.system("sed -r '/^(" + commands[2] + ")$/d' -i /etc/PI_napple/ssid_file")
     elif commands[1] == "beaconinterval":
         if commands[2] == "low":
             communicate("beacon_interval:low")
