@@ -117,11 +117,9 @@ class Setup extends APIModule
         @session_write_close();
         if (file_exists('/etc/PI_napple/setupRequired')) {
             switch ($this->request->action) {
-                /* Disabled for PI_napple
                 case 'checkButtonStatus':
                     $this->checkButtonStatus();
                     break;
-                */
                 case 'performSetup':
                     $this->performSetup();
                     break;
