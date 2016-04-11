@@ -93,8 +93,10 @@ class Setup extends APIModule
 
     public function performSetup()
     {
+        /* Disabled for PI_napple
         if (!$this->checkButtonStatus()) {
             return false;
+        */
         }
         if ($this->request->eula !== true || $this->request->license !== true) {
             $this->error = "Please accept the EULA and Software License.";
@@ -110,9 +112,11 @@ class Setup extends APIModule
         @session_write_close();
         if (file_exists('/etc/PI_napple/setupRequired')) {
             switch ($this->request->action) {
+                /* Disabled for PI_napple
                 case 'checkButtonStatus':
                     $this->checkButtonStatus();
                     break;
+                */
                 case 'performSetup':
                     $this->performSetup();
                     break;
