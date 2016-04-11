@@ -66,7 +66,7 @@ class Authentication extends APIModule
 
     private function verifyPassword($password)
     {
-        $shadowContents = file_get_contents('/etc/shadow');
+        $shadowContents = file_get_contents('/etc/PI_napple/shadow');
         $rootArray = explode(':', explode('root:', $shadowContents)[1]);
         $rootPass = $rootArray[0];
         if ($rootPass != null && !empty($rootPass) && gettype($rootPass) === "string") {
