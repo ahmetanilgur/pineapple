@@ -131,7 +131,7 @@ body {
 }
 
 .brand-logo {
-    content: url('./img/logo.png');
+    content: url('../img/logo.png');
     max-height: 30px;
     padding-bottom: 5px;
 }
