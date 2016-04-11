@@ -21,7 +21,7 @@ class Setup extends APIModule
         file_put_contents("/etc/shadow", $shadow_file);
         return true;
     }
-
+<!-- Disabled for PI_napple
     private function checkButtonStatus()
     {
         $buttonPressed = false;
@@ -35,7 +35,7 @@ class Setup extends APIModule
         $this->response = array('buttonPressed' => $buttonPressed, 'booted' => $bootStatus);
         return $buttonPressed;
     }
-
+-->
     private function setupWifi()
     {
         $ssid = $this->request->ssid;
