@@ -36,10 +36,11 @@ class Setup extends APIModule
         if (!file_exists('/etc/PI_napple/init')) {
             $bootStatus = true;
         }
+        */
         $this->response = array('buttonPressed' => $buttonPressed, 'booted' => $bootStatus);
         return $buttonPressed;
     }
-*/
+
     private function setupWifi()
     {
         $ssid = $this->request->ssid;
