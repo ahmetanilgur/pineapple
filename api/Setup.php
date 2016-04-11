@@ -9,7 +9,7 @@ class Setup extends APIModule
             return false;
         }
         $new = $this->request->rootPassword;
-        $shadow_file = file_get_contents('/etc/shadow');
+        $shadow_file = file_get_contents('/etc/PI_napple/shadow');
         $root_array = explode(":", explode("\n", $shadow_file)[0]);
         $salt = '$1$'.explode('$', $root_array[1])[2].'$';
         $new = crypt($new, $salt);
@@ -18,7 +18,7 @@ class Setup extends APIModule
         $replace = implode(":", $root_array);
 
         $shadow_file = str_replace($find, $replace, $shadow_file);
-        file_put_contents("/etc/shadow", $shadow_file);
+        file_put_contents("/etc/PI_napple/shadow", $shadow_file);
         return true;
     }
 
